@@ -22,10 +22,10 @@ jobs:
 
         - name : Build Docker image
           run: |
-           docker build -t todoprodacrz8x37a.azurecr.io/GetTask-todo-microservices:${GITHUB_SHA::8} .
+           docker build -t todoprodacrz8x37a.azurecr.io/gettask-todo-microservices:${GITHUB_SHA::8} .
 
         - name: Push Docker Image
           run: |
-           docker push todoprodacrz8x37a.azurecr.io/GetTask-todo-microservices:${GITHUB_SHA::8}
+           docker push todoprodacrz8x37a.azurecr.io/gettask-todo-microservices:${GITHUB_SHA::8}
 
           
