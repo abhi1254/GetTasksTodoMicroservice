@@ -1,0 +1,31 @@
+name: GetTask Build and Push Docker Image to ACR
+on:
+  push:
+    branches:
+       - main
+
+jobs:
+ build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+        - name : Checkout repo
+          uses: actions/checkout@v3
+          
+        - name: Azure login
+          uses: azure/login@v1
+          with:
+             creds:  ${{ secrets.AZURE_CREDENTIALS }}
+
+        - name: Docker login to ACR
+          run: |
+           az acr login --name todoprodacrz8x37a
+
+        - name : Build Docker image
+          run: |
+           docker build -t todoprodacrz8x37a.azurecr.io/GetTask-todo-microservices:${GITHUB_SHA::8} .
+
+        - name: Push Docker Image
+          run: |
+           docker push todoprodacrz8x37a.azurecr.io/GetTask-todo-microservices:${GITHUB_SHA::8}
+
+          
